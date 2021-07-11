@@ -1,0 +1,9 @@
+<div *ngIf="doneLoading; else loading">
+  <app-starship-item
+    *ngFor="let starship of starshipList"
+    [starship]="starship">
+  </app-starship-item>
+</div>
+<ng-template #loading>
+  Loading
+</ng-template>
