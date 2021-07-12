@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Starship } from '../models/Starship';
+import { Pilot } from '../models/Pilot';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,9 @@ export class DataService {
   starshipIdIncrement: number = 1;
   starships: Starship[] = [];
   starshipsLoaded: boolean = false;
+
+  pilotIdIncrement: number = 1;
+  pilots: Pilot[] = [];
 
   private subject = new Subject<any>();
 
@@ -35,6 +39,21 @@ export class DataService {
       for (const starship of response.results) {
         starship.id = this.starshipIdIncrement;
         this.starshipIdIncrement++;
+        const pilotsData = [];
+        for (const pilotUrl of starship.pilots) {
+          const pilot = this.pilots.find((p) => p.url === pilotUrl);
+          if (!pilot) {
+            this.fetchPilot(pilotUrl).subscribe((pilot: Pilot) => {
+              pilot.id = this.pilotIdIncrement;
+              this.pilotIdIncrement++;
+              pilotsData.push(pilot);
+              this.pilots.push(pilot);
+            })
+          } else {
+            pilotsData.push(pilot);
+          }
+        }
+        starship.pilotsData = pilotsData;
         this.starships.push(starship);
       }
 
@@ -49,12 +68,20 @@ export class DataService {
     });
   }
 
+  fetchPilot(url: string): Observable<Pilot> {
+    return this.http.get<Pilot>(url);
+  }
+
   getStarships(): Starship[] {
     return this.starships;
   }
 
   getStarship(id: number): Starship {
     return this.starships.find((starship) => starship.id === id);
+  }
+
+  getPilot(id: number): Pilot {
+    return this.pilots.find((pilot) => pilot.id === id);
   }
 
   onDataLoaded(): Observable<any> {

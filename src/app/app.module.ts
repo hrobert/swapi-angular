@@ -8,10 +8,13 @@ import { StarshipsComponent } from './components/starships/starships.component';
 import { StarshipItemComponent } from './components/starship-item/starship-item.component';
 import { StarshipComponent } from './components/starship/starship.component';
 import { NavComponent } from './components/nav/nav.component';
+import { PilotItemComponent } from './components/pilot-item/pilot-item.component';
+import { PilotComponent } from './components/pilot/pilot.component';
 
 const appRoutes: Routes = [
   { path: '', component: StarshipsComponent },
-  { path: 'starship/:id', component: StarshipComponent }
+  { path: 'starship/:id', component: StarshipComponent },
+  { path: 'pilot/:id', component: PilotComponent }
 ];
 @NgModule({
   declarations: [
@@ -19,7 +22,9 @@ const appRoutes: Routes = [
     StarshipsComponent,
     StarshipItemComponent,
     StarshipComponent,
-    NavComponent
+    NavComponent,
+    PilotItemComponent,
+    PilotComponent
   ],
   imports: [
     BrowserModule,

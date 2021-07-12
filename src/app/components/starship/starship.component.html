@@ -1,1 +1,6 @@
 <p>{{ starship.name }}</p>
+<p>PILOTS:</p>
+<app-pilot-item
+  *ngFor="let pilot of starship.pilotsData"
+  [pilot]="pilot">
+</app-pilot-item>

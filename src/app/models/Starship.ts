@@ -1,3 +1,5 @@
+import { Pilot } from "./Pilot";
+
 /**
  * To simplify things, all properties are just strings and the case used is the
  * same as the one from the API
@@ -21,6 +23,8 @@ export interface Starship {
 
   pilots: string[];
   films: string[];
+
+  pilotsData: Pilot[];
 
   created: string;
   edited: string;
