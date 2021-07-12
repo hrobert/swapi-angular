@@ -1,17 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Starship } from 'src/app/models/Starship';
 
+/**
+ * Component that handles the display of a starship item (in a list of starships).
+ */
 @Component({
   selector: 'app-starship-item',
   templateUrl: './starship-item.component.html',
   styleUrls: ['./starship-item.component.css']
 })
-export class StarshipItemComponent implements OnInit {
+export class StarshipItemComponent {
 
-  @Input() starship;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  @Input() starship: Starship;
 
 }

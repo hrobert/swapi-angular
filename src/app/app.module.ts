@@ -10,6 +10,7 @@ import { StarshipComponent } from './components/starship/starship.component';
 import { NavComponent } from './components/nav/nav.component';
 import { PilotItemComponent } from './components/pilot-item/pilot-item.component';
 import { PilotComponent } from './components/pilot/pilot.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 const appRoutes: Routes = [
   { path: '', component: StarshipsComponent },
@@ -24,7 +25,8 @@ const appRoutes: Routes = [
     StarshipComponent,
     NavComponent,
     PilotItemComponent,
-    PilotComponent
+    PilotComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

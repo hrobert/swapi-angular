@@ -1,3 +1,5 @@
+<h1>Swangular</h1>
+
 <div *ngIf="dataLoaded; else loading" class="card-container">
   <app-starship-item
     *ngFor="let starship of starships"
@@ -6,5 +8,5 @@
 </div>
 
 <ng-template #loading>
-  Loading data...
+  <app-loading></app-loading>
 </ng-template>

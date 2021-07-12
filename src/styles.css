@@ -7,6 +7,7 @@
   --text: #91b6e2;
   --text-secondary: #74abf0;
   --accent: #E94560;
+  --accent-secondary: #c4324a;
 }
 
 * {
@@ -27,4 +28,54 @@ a {
 
 .content {
   margin: 20px;
+}
+
+/* Card */
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  border: 5px var(--secondary) solid;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: var(--tertiary);
+  padding: 20px;
+  width: 500px;
+}
+
+.card-title {
+  font-size: 1.4em;
+  color: var(--accent);
+  width: 100%;
+  padding-bottom: 10px;
+  border-bottom: 1px var(--secondary) solid;
+  margin-bottom: 10px;
+}
+
+.content-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content-item-label {
+  font-weight: bold;
+  font-size: 1.0em;
+  margin-right: 10px;
+}
+
+.content-item-data {
+  font-size: 0.9em;
+  text-align: right;
+}
+
+.content-counts {
+  padding-top: 10px;
+  border-top: 1px var(--secondary) solid;
+  margin-top: 10px;
+  color: var(--text-secondary);
 }

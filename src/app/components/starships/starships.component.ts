@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../services/data.service';
-import { Starship } from '../../models/Starship';
+import { Starship } from 'src/app/models/Starship';
+import { DataService } from 'src/app/services/data.service';
 
 /**
  * Component that handles the display of the list of starships.
