@@ -1,3 +1,4 @@
 <div class="nav">
-  <a routerLink="/">Back home</a>
+  <a routerLink="/">HOME</a>
+  <button *ngIf="!hasRoute('/')" (click)="back()">Back</button>
 </div>
