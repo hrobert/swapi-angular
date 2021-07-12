@@ -10,11 +10,18 @@ import { StarshipComponent } from './components/starship/starship.component';
 import { NavComponent } from './components/nav/nav.component';
 import { PilotItemComponent } from './components/pilot-item/pilot-item.component';
 import { PilotComponent } from './components/pilot/pilot.component';
+import { LoadingComponent } from './pages/loading/loading.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { BadRequestComponent } from './pages/bad-request/bad-request.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 const appRoutes: Routes = [
   { path: '', component: StarshipsComponent },
   { path: 'starship/:id', component: StarshipComponent },
-  { path: 'pilot/:id', component: PilotComponent }
+  { path: 'pilot/:id', component: PilotComponent },
+  { path: '400', component: BadRequestComponent },
+  { path: '404', component: NotFoundComponent },
+  { path: '**', component: NotFoundComponent }
 ];
 @NgModule({
   declarations: [
@@ -24,7 +31,11 @@ const appRoutes: Routes = [
     StarshipComponent,
     NavComponent,
     PilotItemComponent,
-    PilotComponent
+    PilotComponent,
+    LoadingComponent,
+    NotFoundComponent,
+    BadRequestComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

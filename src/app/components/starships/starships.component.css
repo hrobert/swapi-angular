@@ -1,0 +1,10 @@
+h1 {
+  font-size: 2.5em;
+  text-align: center;
+  color: var(--accent-secondary);
+  margin-bottom: 30px;
+}
+
+h1 a {
+  text-decoration: none;
+}

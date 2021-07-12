@@ -1,7 +1,9 @@
 <div class="card" [routerLink]="['/starship', starship.id]">
+
   <div class="card-title">
       {{ starship.name }}
   </div>
+
   <div class="card-content">
     <div class="content-item">
       <span class="content-item-label">Model</span>
@@ -16,9 +18,52 @@
       <span class="content-item-data">{{ starship.cost_in_credits }}</span>
     </div>
     <div class="content-item">
-      <span class="content-item-label">Pilots count</span>
-      <span class="content-item-data">{{ starship.pilots.length }}</span>
+      <span class="content-item-label">Length</span>
+      <span class="content-item-data">{{ starship.length }}</span>
+    </div>
+    <div class="content-item">
+      <span class="content-item-label">Max speed</span>
+      <span class="content-item-data">{{ starship.max_atmosphering_speed }}</span>
+    </div>
+    <div class="content-item">
+      <span class="content-item-label">Crew</span>
+      <span class="content-item-data">{{ starship.crew }}</span>
+    </div>
+    <div class="content-item">
+      <span class="content-item-label">Passengers</span>
+      <span class="content-item-data">{{ starship.passengers }}</span>
+    </div>
+    <div class="content-item">
+      <span class="content-item-label">Cargo capacity</span>
+      <span class="content-item-data">{{ starship.cargo_capacity }}</span>
+    </div>
+    <div class="content-item">
+      <span class="content-item-label">Consumables</span>
+      <span class="content-item-data">{{ starship.consumables }}</span>
+    </div>
+    <div class="content-item">
+      <span class="content-item-label">Hyperdrive rating</span>
+      <span class="content-item-data">{{ starship.hyperdrive_rating }}</span>
+    </div>
+    <div class="content-item">
+      <span class="content-item-label">MGLT</span>
+      <span class="content-item-data">{{ starship.MGLT }}</span>
+    </div>
+    <div class="content-item">
+      <span class="content-item-label">Starship class</span>
+      <span class="content-item-data">{{ starship.starship_class }}</span>
     </div>
 
+    <div class="content-counts">
+      <div class="content-item">
+        <span class="content-item-label">Pilots count</span>
+        <span class="content-item-data">{{ starship.pilots.length }}</span>
+      </div>
+      <div class="content-item">
+        <span class="content-item-label">Films count</span>
+        <span class="content-item-data">{{ starship.films.length }}</span>
+      </div>
+    </div>
   </div>
+
 </div>

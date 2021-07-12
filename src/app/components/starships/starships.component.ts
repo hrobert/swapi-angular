@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../services/data.service';
-import { Starship } from '../../models/Starship';
+import { Starship } from 'src/app/models/Starship';
+import { DataService } from 'src/app/services/data.service';
 
+/**
+ * Component that handles the display of the list of starships.
+ */
 @Component({
   selector: 'app-starships',
   templateUrl: './starships.component.html',
@@ -16,14 +19,17 @@ export class StarshipsComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.dataService.isDataLoaded()) {
-      this.dataLoaded = true;
-      this.starships = this.dataService.getStarships();
+      this.initData();
     } else {
       this.dataService.onDataLoaded().subscribe(() => {
-        this.dataLoaded = true;
-        this.starships = this.dataService.getStarships();
+        this.initData();
       });
     }
+  }
+
+  private initData(): void {
+    this.dataLoaded = true;
+    this.starships = this.dataService.getStarships();
   }
 
 }

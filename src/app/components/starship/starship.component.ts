@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { Starship } from 'src/app/models/Starship';
 
 /**
- * If we arrived in this component, data should already be loaded.
- * Should we still do a check?
+ * Component that handles the display of a starship detail view.
  */
 @Component({
   selector: 'app-starship',
@@ -14,24 +13,37 @@ import { Starship } from 'src/app/models/Starship';
 })
 export class StarshipComponent implements OnInit {
 
-  id: number;
+  dataLoaded: boolean = false;
   starship: Starship;
 
-  constructor(private route: ActivatedRoute, private dataService: DataService) { }
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private dataService: DataService) { }
 
   ngOnInit(): void {
-    console.log('STARSHIP COMPONENT');
+    if (this.dataService.isDataLoaded()) {
+      this.initData();
+    } else {
+      this.dataService.onDataLoaded().subscribe(() => {
+        this.initData();
+      });
+    }
+  }
 
+  private initData(): void {
+    this.dataLoaded = true;
     this.route.paramMap.subscribe(params => {
-      this.id = Number(params.get('id'));
-
-      console.log('PARAMS', params);
-      console.log('id', this.id);
-
-
-      this.starship = this.dataService.getStarship(this.id);
-
-      console.log('starship', this.starship);
+      const id = Number(params.get('id'));
+      if (!isNaN(id)) {
+        this.starship = this.dataService.getStarship(id);
+        if (!this.starship) {
+          // Redirect to 404 not found error page
+          this.router.navigateByUrl('/404');
+        }
+      } else {
+        // Redirect to bad request page
+        this.router.navigateByUrl('/400');
+      }
     });
   }
 

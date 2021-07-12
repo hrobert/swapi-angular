@@ -1,4 +1,6 @@
-<div *ngIf="dataLoaded; else loading">
+<h1><a href="https://github.com/hrobert/swapi-angular">Swangular</a></h1>
+
+<div *ngIf="dataLoaded; else loading" class="card-container">
   <app-starship-item
     *ngFor="let starship of starships"
     [starship]="starship">
@@ -6,5 +8,5 @@
 </div>
 
 <ng-template #loading>
-  Loading data...
+  <app-loading></app-loading>
 </ng-template>

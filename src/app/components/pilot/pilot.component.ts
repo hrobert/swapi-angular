@@ -1,33 +1,49 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { Pilot } from 'src/app/models/Pilot';
 
 /**
- * If we arrived in this component, data should already be loaded.
- * Should we still do a check?
+ * Component that handles the display of a pilot detail view.
  */
 @Component({
   selector: 'app-pilot',
-  templateUrl: './pilot.component.html',
-  styleUrls: ['./pilot.component.css']
+  templateUrl: './pilot.component.html'
 })
 export class PilotComponent implements OnInit {
 
+  dataLoaded: boolean = false;
   pilot: Pilot;
 
-  constructor(private route: ActivatedRoute, private dataService: DataService) { }
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private dataService: DataService) { }
 
   ngOnInit(): void {
-    console.log('PILOT COMPONENT');
+    if (this.dataService.isDataLoaded()) {
+      this.initData();
+    } else {
+      this.dataService.onDataLoaded().subscribe(() => {
+        this.initData();
+      });
+    }
+  }
 
+  private initData(): void {
+    this.dataLoaded = true;
     this.route.paramMap.subscribe(params => {
       const id = Number(params.get('id'));
-
-      this.pilot = this.dataService.getPilot(id);
-
-      console.log('pilot', this.pilot);
-    })
+      if (!isNaN(id)) {
+        this.pilot = this.dataService.getPilot(id);
+        if (!this.pilot) {
+          // Redirect to 404 not found error page
+          this.router.navigateByUrl('/404');
+        }
+      } else {
+        // Redirect to bad request page
+        this.router.navigateByUrl('/400');
+      }
+    });
   }
 
 }
