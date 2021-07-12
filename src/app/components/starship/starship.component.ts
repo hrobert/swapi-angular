@@ -4,7 +4,7 @@ import { DataService } from 'src/app/services/data.service';
 import { Starship } from 'src/app/models/Starship';
 
 /**
- * Component that handles the display of the starship detail view.
+ * Component that handles the display of a starship detail view.
  */
 @Component({
   selector: 'app-starship',

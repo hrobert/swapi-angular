@@ -4,8 +4,7 @@ import { DataService } from 'src/app/services/data.service';
 import { Pilot } from 'src/app/models/Pilot';
 
 /**
- * If we arrived in this component, data should already be loaded.
- * Should we still do a check?
+ * Component that handles the display of a pilot detail view.
  */
 @Component({
   selector: 'app-pilot',
@@ -14,20 +13,34 @@ import { Pilot } from 'src/app/models/Pilot';
 })
 export class PilotComponent implements OnInit {
 
+  dataLoaded: boolean = false;
   pilot: Pilot;
 
   constructor(private route: ActivatedRoute, private dataService: DataService) { }
 
   ngOnInit(): void {
-    console.log('PILOT COMPONENT');
+    if (this.dataService.isDataLoaded()) {
+      this.initData();
+    } else {
+      this.dataService.onDataLoaded().subscribe(() => {
+        this.initData();
+      });
+    }
+  }
 
+  initData(): void {
+    this.dataLoaded = true;
     this.route.paramMap.subscribe(params => {
       const id = Number(params.get('id'));
-
-      this.pilot = this.dataService.getPilot(id);
-
-      console.log('pilot', this.pilot);
-    })
+      if (!isNaN(id)) {
+        this.pilot = this.dataService.getPilot(id);
+        if (!this.pilot) {
+          // TODO: redirect to NOT FOUND page
+        }
+      } else {
+        // TODO: redirect to BAD REQUEST page
+      }
+    });
   }
 
 }

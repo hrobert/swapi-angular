@@ -26,6 +26,23 @@ a {
   color: var(--accent);
 }
 
+h2 {
+  color: var(--accent);
+  font-size: 1.8em;
+  padding-bottom: 10px;
+  border-bottom: var(--secondary) 2px solid;
+  margin-bottom: 20px;
+}
+
+h3 {
+  color: var(--text-secondary);
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  border-top: 1px var(--secondary) solid;
+  margin-top: 10px;
+}
+
 .content {
   margin: 20px;
 }
@@ -78,4 +95,20 @@ a {
   border-top: 1px var(--secondary) solid;
   margin-top: 10px;
   color: var(--text-secondary);
+}
+
+/* Detail specification */
+
+.specification-label {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-right: 10px;
+}
+
+.specification-data {
+  font-size: 1.0em;
+}
+
+.specification-list {
+  margin-top: 20px;
 }

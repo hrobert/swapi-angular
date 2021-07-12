@@ -52,14 +52,17 @@
         <span class="specification-data">{{ starship.starship_class }}</span>
       </div>
 
-      <div *ngIf="starship.pilotsData.length > 0" class="specification-list">
+      <div class="specification-list">
         <h3>Pilots</h3>
-        <div class="card-container">
+        <div *ngIf="starship.pilotsData.length > 0; else noPilot" class="card-container">
           <app-pilot-item
             *ngFor="let pilot of starship.pilotsData"
             [pilot]="pilot">
           </app-pilot-item>
         </div>
+        <ng-template #noPilot>
+          <p>No pilot for this starship</p>
+        </ng-template>
       </div>
     </div>
   </div>
