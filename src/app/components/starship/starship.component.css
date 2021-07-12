@@ -1,0 +1,21 @@
+h2 {
+  color: var(--accent);
+  font-size: 1.8em;
+  padding-bottom: 10px;
+  border-bottom: var(--secondary) 2px solid;
+  margin-bottom: 20px;
+}
+
+.specification-label {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-right: 10px;
+}
+
+.specification-data {
+  font-size: 1.0em;
+}
+
+.specification-list {
+  margin-top: 20px;
+}
