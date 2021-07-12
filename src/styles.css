@@ -112,3 +112,23 @@ h3 {
 .specification-list {
   margin-top: 20px;
 }
+
+/* Error */
+
+.error {
+  width: 500px;
+  background-color: var(--secondary);
+  padding: 50px;
+  margin: auto;
+  text-align: center;
+}
+
+.error h2 {
+  font-size: 2.5em;
+  border-bottom: var(--tertiary) 2px solid;
+}
+
+.error .error-back {
+  margin-top: 20px;
+  color: var(--text-secondary);
+}

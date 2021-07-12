@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { Pilot } from 'src/app/models/Pilot';
 
@@ -16,7 +16,9 @@ export class PilotComponent implements OnInit {
   dataLoaded: boolean = false;
   pilot: Pilot;
 
-  constructor(private route: ActivatedRoute, private dataService: DataService) { }
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private dataService: DataService) { }
 
   ngOnInit(): void {
     if (this.dataService.isDataLoaded()) {
@@ -35,10 +37,12 @@ export class PilotComponent implements OnInit {
       if (!isNaN(id)) {
         this.pilot = this.dataService.getPilot(id);
         if (!this.pilot) {
-          // TODO: redirect to NOT FOUND page
+          // Redirect to 404 not found error page
+          this.router.navigateByUrl('/404');
         }
       } else {
-        // TODO: redirect to BAD REQUEST page
+        // Redirect to bad request page
+        this.router.navigateByUrl('/400');
       }
     });
   }
