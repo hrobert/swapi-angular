@@ -1,6 +1,6 @@
-<div *ngIf="doneLoading; else loading">
+<div *ngIf="dataLoaded; else loading">
   <app-starship-item
-    *ngFor="let starship of starshipList"
+    *ngFor="let starship of starships"
     [starship]="starship">
   </app-starship-item>
 </div>

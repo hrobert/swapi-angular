@@ -1,1 +1,5 @@
-<p>{{ starship.name }} by {{ starship.manufacturer }}</p>
+<p>
+  <a [routerLink]="['/starship', starship.id]">
+    {{ starship.name }}
+  </a> by {{ starship.manufacturer }} ({{ starship.pilots.length }})
+</p>
