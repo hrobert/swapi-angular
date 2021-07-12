@@ -3,8 +3,8 @@
   border-radius: 10px;
   cursor: pointer;
   background-color: var(--tertiary);
-  margin-bottom: 15px;
   padding: 20px;
+  width: 500px;
 }
 
 .card-title {
@@ -16,16 +16,25 @@
   margin-bottom: 10px;
 }
 
-.content-item-label .content-item-data {
-  display: inline-block;
+.content-item {
+  display: flex;
+  justify-content: space-between;
 }
 
 .content-item-label {
   font-weight: bold;
-  font-size: 1.1em;
+  font-size: 1.0em;
   margin-right: 10px;
 }
 
 .content-item-data {
-  font-size: 1.0em;
+  font-size: 0.9em;
+  text-align: right;
+}
+
+.content-counts {
+  padding-top: 10px;
+  border-top: 1px var(--secondary) solid;
+  margin-top: 10px;
+  color: var(--text-secondary);
 }

@@ -1,4 +1,4 @@
-<div *ngIf="dataLoaded; else loading">
+<div *ngIf="dataLoaded; else loading" class="card-container">
   <app-starship-item
     *ngFor="let starship of starships"
     [starship]="starship">
