@@ -13,6 +13,7 @@ import { PilotComponent } from './components/pilot/pilot.component';
 import { LoadingComponent } from './pages/loading/loading.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { BadRequestComponent } from './pages/bad-request/bad-request.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 const appRoutes: Routes = [
   { path: '', component: StarshipsComponent },
@@ -33,7 +34,8 @@ const appRoutes: Routes = [
     PilotComponent,
     LoadingComponent,
     NotFoundComponent,
-    BadRequestComponent
+    BadRequestComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
