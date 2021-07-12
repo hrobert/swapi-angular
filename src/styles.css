@@ -57,7 +57,7 @@ h3 {
 }
 
 .card {
-  border: 5px var(--secondary) solid;
+  margin: 5px;
   border-radius: 10px;
   cursor: pointer;
   background-color: var(--tertiary);

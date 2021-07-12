@@ -27,7 +27,7 @@ export class StarshipsComponent implements OnInit {
     }
   }
 
-  initData(): void {
+  private initData(): void {
     this.dataLoaded = true;
     this.starships = this.dataService.getStarships();
   }

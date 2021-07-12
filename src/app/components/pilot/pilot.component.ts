@@ -30,7 +30,7 @@ export class PilotComponent implements OnInit {
     }
   }
 
-  initData(): void {
+  private initData(): void {
     this.dataLoaded = true;
     this.route.paramMap.subscribe(params => {
       const id = Number(params.get('id'));

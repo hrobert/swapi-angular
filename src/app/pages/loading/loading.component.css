@@ -12,7 +12,7 @@
   width: 300px;
   height: 300px;
   margin: 8px;
-  border: 30px solid #fff;
+  border: 30px solid var(--accent);
   border-radius: 50%;
   animation: loading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: var(--accent) transparent transparent transparent;
