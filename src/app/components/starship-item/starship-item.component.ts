@@ -6,8 +6,7 @@ import { Starship } from 'src/app/models/Starship';
  */
 @Component({
   selector: 'app-starship-item',
-  templateUrl: './starship-item.component.html',
-  styleUrls: ['./starship-item.component.css']
+  templateUrl: './starship-item.component.html'
 })
 export class StarshipItemComponent {
 

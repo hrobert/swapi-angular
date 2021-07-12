@@ -8,8 +8,7 @@ import { Pilot } from 'src/app/models/Pilot';
  */
 @Component({
   selector: 'app-pilot',
-  templateUrl: './pilot.component.html',
-  styleUrls: ['./pilot.component.css']
+  templateUrl: './pilot.component.html'
 })
 export class PilotComponent implements OnInit {
 
