@@ -25,7 +25,7 @@ export class DataService {
   private pilots: Pilot[] = [];
 
   private dataLoaded: boolean = false;
-  private subject = new Subject<any>();
+  private subject = new Subject<void>();
 
 
   // ============================================================================
