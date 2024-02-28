@@ -12,6 +12,8 @@
     Data is retrieved from <a href="https://swapi.dev/">SWAPI</a>.
   </p>
 
+  <!--
+  Live demo is not available anymore.
   <p>
     <b>
       <a href="https://swangular.imaohi.com/" target="_blank">
@@ -19,10 +21,13 @@
       </a>
     </b>
   </p>
+  -->
 </div>
 
 <!-- FEATURES -->
+
 ## ⭐ Features
+
 - Users can see the list of all Star Wars starships on the landing page with
   a summary of the specifications for each of them.
 - Users can click on a starship card to show the details of the starship,
@@ -30,39 +35,37 @@
 - Users can click on a listed pilot in the starship details to show the
   pilot details.
 - Users can come back to the landing page at any time by clicking on the
-  *Home* link in the nav bar.
+  _Home_ link in the nav bar.
 
 ## 🛠 Installation
 
-A live demo of the app is available
-<a href="https://swangular.imaohi.com/" target="_blank">here</a> but if you want
-to run it locally, follow these steps:
+To run the app locally, follow these steps:
 
-1. Make sure you have <a href="https://nodejs.org/">node</a> 18 (`lts/hydrogen`)
-and a recent version of the
-<a href="https://github.com/angular/angular-cli">Angular CLI</a> installed
-globally. Optionally, we recommend having
-<a href="https://github.com/nvm-sh/nvm">nvm</a> installed and configured.
+1. Make sure you have <a href="https://nodejs.org/">node</a> 20 (`lts/iron`)
+   and a recent version of the
+   <a href="https://github.com/angular/angular-cli">Angular CLI</a> installed
+   globally. Optionally, we recommend having
+   <a href="https://github.com/nvm-sh/nvm">nvm</a> installed and configured.
 
 2. Clone or download this repository
-    ```sh
-    git clone git@github.com:hrobert/swapi-angular.git    # ssh
-    # or
-    git clone https://github.com/hrobert/swapi-angular    # http
-    ```
+   ```sh
+   git clone git@github.com:hrobert/swapi-angular.git    # ssh
+   # or
+   git clone https://github.com/hrobert/swapi-angular    # http
+   ```
 3. Navigate to the project directory
-    ```sh
-    cd swapi-angular
-    ```
+   ```sh
+   cd swapi-angular
+   ```
 4. Install the dependencies
-    ```sh
-    nvm use    # if you have nvm installed
-    npm install
-    ```
+   ```sh
+   nvm use    # if you have nvm installed
+   npm install
+   ```
 5. Build and serve the app
-    ```sh
-    npm start
-    ```
+   ```sh
+   npm start
+   ```
 6. Open a browser and visit <a href="http://localhost:4200/">http://localhost:4200/</a>
 
 ## 📷 Screenshots
