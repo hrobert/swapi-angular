@@ -9,19 +9,8 @@
   </p>
   <p>
     Angular app that allows users to navigate the different Star Wars starships and pilots.<br />
-    Data is retrieved from <a href="https://swapi.dev/">SWAPI</a>.
+    Data is retrieved from <a href="https://swapi.info/">SWAPI</a>.
   </p>
-
-  <!--
-  Live demo is not available anymore.
-  <p>
-    <b>
-      <a href="https://swangular.imaohi.com/" target="_blank">
-        » View Live Demo «
-      </a>
-    </b>
-  </p>
-  -->
 </div>
 
 <!-- FEATURES -->

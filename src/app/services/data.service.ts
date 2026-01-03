@@ -15,8 +15,8 @@ export class DataService {
   // ============================================================================
   // Fields
   // ============================================================================
-  private readonly baseApiUrl: string = 'https://swapi.dev/api';
-  private readonly starshipsEndpoint: string = 'starships';
+  private readonly BASE_API_URL: string = 'https://swapi.info';
+  private readonly STARSHIPS_ENDPOINT: string = 'starships';
 
   private starshipIdIncrement: number = 1;
   private starships: Starship[] = [];
@@ -43,7 +43,7 @@ export class DataService {
    * Fetch and load all the data (starships and their pilots).
    */
   private loadData(): void {
-    this.loadStarshipsAndPilots(`${this.baseApiUrl}/${this.starshipsEndpoint}`);
+    this.loadStarshipsAndPilots(`${this.BASE_API_URL}/${this.STARSHIPS_ENDPOINT}`);
   }
 
   /**
