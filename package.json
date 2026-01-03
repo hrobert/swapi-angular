@@ -2,8 +2,8 @@
   "name": "swapi-angular",
   "version": "0.0.0",
   "engines": {
-    "node": ">= 20",
-    "npm": ">= 10"
+    "node": ">= 24",
+    "npm": ">= 11"
   },
   "scripts": {
     "ng": "ng",
@@ -31,5 +31,8 @@
     "@angular/compiler-cli": "^17.2.3",
     "@types/node": "^20.11.21",
     "typescript": "5.3.3"
+  },
+  "volta": {
+    "node": "24.12.0"
   }
 }

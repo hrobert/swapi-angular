@@ -41,11 +41,11 @@
 
 To run the app locally, follow these steps:
 
-1. Make sure you have <a href="https://nodejs.org/">node</a> 20 (`lts/iron`)
+1. Make sure you have <a href="https://nodejs.org/">node</a> 24 (`lts/kryton`)
    and a recent version of the
    <a href="https://github.com/angular/angular-cli">Angular CLI</a> installed
    globally. Optionally, we recommend having
-   <a href="https://github.com/nvm-sh/nvm">nvm</a> installed and configured.
+   <a href="https://volta.sh/">volta</a> installed and configured.
 
 2. Clone or download this repository
    ```sh
@@ -59,7 +59,6 @@ To run the app locally, follow these steps:
    ```
 4. Install the dependencies
    ```sh
-   nvm use    # if you have nvm installed
    npm install
    ```
 5. Build and serve the app

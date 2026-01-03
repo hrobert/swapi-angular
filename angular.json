@@ -85,5 +85,8 @@
       }
     }
   },
-  "defaultProject": "swapi-angular"
+  "defaultProject": "swapi-angular",
+  "cli": {
+    "analytics": false
+  }
 }
