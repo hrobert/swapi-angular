@@ -1,0 +1,57 @@
+import { Location } from '@angular/common';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+/**
+ * Component that handles the nav bar. The implementation of the back button
+ * is naive. It works in most cases.
+ */
+@Component({
+  standalone: true,
+  selector: 'app-nav',
+  template: `
+    <div class="nav">
+      <a class="home" routerLink="/">Home</a>
+      @if (canGoBack()) {
+        <a class="back" (click)="back()">Back</a>
+      }
+    </div>
+  `,
+  styles: `
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      background-color: var(--accent);
+      height: 70px;
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+
+    .nav a {
+      color: var(--tertiary);
+      vertical-align: middle;
+      height: 70px;
+      line-height: 70px;
+      text-decoration: none;
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+  `,
+})
+export class NavComponent {
+  private readonly routesCannotBack = ['/', '/400', '/404'];
+
+  constructor(
+    private router: Router,
+    private location: Location,
+  ) {}
+
+  back(): void {
+    this.location.back();
+  }
+
+  canGoBack(): boolean {
+    return !this.routesCannotBack.includes(this.router.url);
+  }
+}

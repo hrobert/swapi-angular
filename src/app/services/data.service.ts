@@ -1,15 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { Starship } from '../models/Starship';
 import { Pilot } from '../models/Pilot';
+import { Starship } from '../models/Starship';
 
 /**
  * Service responsible for fetching the data from the distant API and storing it.
  * The data retrieved from SWAPI are limited to: starships and their pilots.
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DataService {
   // ============================================================================
@@ -27,14 +27,12 @@ export class DataService {
   private dataLoaded: boolean = false;
   private subject = new Subject<void>();
 
-
   // ============================================================================
   // Constructor
   // ============================================================================
   constructor(private http: HttpClient) {
     this.loadData();
   }
-
 
   // ============================================================================
   // Data loading methods
@@ -43,7 +41,9 @@ export class DataService {
    * Fetch and load all the data (starships and their pilots).
    */
   private loadData(): void {
-    this.loadStarshipsAndPilots(`${this.BASE_API_URL}/${this.STARSHIPS_ENDPOINT}`);
+    this.loadStarshipsAndPilots(
+      `${this.BASE_API_URL}/${this.STARSHIPS_ENDPOINT}`,
+    );
   }
 
   /**
@@ -56,7 +56,6 @@ export class DataService {
    */
   private loadStarshipsAndPilots(url: string): void {
     this.fetchStarships(url).subscribe((response) => {
-
       for (const starship of response.results) {
         // Generate an id based on local increment which has nothing to do with
         // SWAPI's id
@@ -76,7 +75,7 @@ export class DataService {
 
               this.pilots.push(pilot);
               pilotsData.push(pilot);
-            })
+            });
           } else {
             pilotsData.push(pilot);
           }
@@ -89,14 +88,13 @@ export class DataService {
       // If there is another page of data, request it
       if (response.next) {
         this.loadStarshipsAndPilots(response.next);
-      } else { // no page left, all async calls done, all data is loaded
+      } else {
+        // no page left, all async calls done, all data is loaded
         this.dataLoaded = true;
         this.subject.next();
       }
-
     });
   }
-
 
   // ============================================================================
   // Http calls
@@ -110,7 +108,6 @@ export class DataService {
   private fetchPilot(url: string): Observable<Pilot> {
     return this.http.get<Pilot>(url);
   }
-
 
   // ============================================================================
   // Accessors
@@ -132,7 +129,7 @@ export class DataService {
    * @param id Client id of the starship to be retrieved.
    * @returns The starship with the given id if starship is found, undefined otherwise.
    */
-  getStarship(id: number): Starship {
+  getStarship(id: number): Starship | undefined {
     return this.starships.find((starship) => starship.id === id);
   }
 
@@ -144,7 +141,7 @@ export class DataService {
    * @param id Client id of the pilot to be retrieved.
    * @returns The pilot with the given id if pilot is found, undefined otherwise.
    */
-  getPilot(id: number): Pilot {
+  getPilot(id: number): Pilot | undefined {
     return this.pilots.find((pilot) => pilot.id === id);
   }
 
