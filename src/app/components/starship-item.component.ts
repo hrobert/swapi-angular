@@ -1,5 +1,6 @@
 import { Component, input } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterLink } from '@angular/router';
+
 import { Starship } from '../models/Starship';
 
 /**
@@ -8,7 +9,7 @@ import { Starship } from '../models/Starship';
 @Component({
   standalone: true,
   selector: 'app-starship-item',
-  imports: [RouterModule],
+  imports: [RouterLink],
   template: `
     <div class="card" [routerLink]="['/starship', starship().id]">
       <div class="card-title">

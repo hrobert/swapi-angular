@@ -1,7 +1,7 @@
 <!-- TITLE -->
 <div align="center">
   <p>
-    <img src="src/assets/img/swangular.png" width="150px">
+    <img src="doc/logo/swangular.png" width="150px">
   </p>
   <h1>Swangular</h1>
   <p>
@@ -30,11 +30,8 @@
 
 To run the app locally, follow these steps:
 
-1. Make sure you have <a href="https://nodejs.org/">node</a> 24 (`lts/kryton`)
-   and a recent version of the
-   <a href="https://github.com/angular/angular-cli">Angular CLI</a> installed
-   globally. Optionally, we recommend having
-   <a href="https://volta.sh/">volta</a> installed and configured.
+1. Make sure you have <a href="https://nodejs.org/">node</a> 24 (`lts/kryton`).
+   Optionally, we recommend having <a href="https://volta.sh/">volta</a> installed and configured.
 
 2. Clone or download this repository
    ```sh
@@ -50,7 +47,7 @@ To run the app locally, follow these steps:
    ```sh
    npm install
    ```
-5. Build and serve the app
+5. Serve the app
    ```sh
    npm start
    ```
@@ -58,7 +55,7 @@ To run the app locally, follow these steps:
 
 ## 📷 Screenshots
 
-<p><img src="./screenshots/loading.png" alt="screenshot loading spinner"></p>
-<p><img src="./screenshots/landing-page.png" alt="screenshot landing page"></p>
-<p><img src="./screenshots/starship.png" alt="screenshot starship details"></p>
-<p><img src="./screenshots/bad-request.png" alt="screenshot bad request error page"></p>
+<p><img src="doc/screenshots/loading.png" alt="screenshot loading spinner"></p>
+<p><img src="doc/screenshots/landing-page.png" alt="screenshot landing page"></p>
+<p><img src="doc/screenshots/starship.png" alt="screenshot starship details"></p>
+<p><img src="doc/screenshots/bad-request.png" alt="screenshot bad request error page"></p>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 /**
  * Component that handles not found page.
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
 @Component({
   standalone: true,
   selector: 'app-not-found',
+  imports: [RouterLink],
   template: `
     <div class="error">
       <h2>404 Not Found</h2>
@@ -16,4 +18,4 @@ import { Component } from '@angular/core';
     </div>
   `,
 })
-export class NotFoundComponent {}
+export class NotFoundPage {}

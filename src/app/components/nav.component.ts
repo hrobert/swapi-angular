@@ -1,6 +1,5 @@
-import { Location } from '@angular/common';
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 /**
  * Component that handles the nav bar. The implementation of the back button
@@ -9,11 +8,12 @@ import { Router } from '@angular/router';
 @Component({
   standalone: true,
   selector: 'app-nav',
+  imports: [RouterLink],
   template: `
     <div class="nav">
       <a class="home" routerLink="/">Home</a>
       @if (canGoBack()) {
-        <a class="back" (click)="back()">Back</a>
+        <a class="back" (click)="navigateToParent()">Back</a>
       }
     </div>
   `,
@@ -40,15 +40,13 @@ import { Router } from '@angular/router';
   `,
 })
 export class NavComponent {
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
   private readonly routesCannotBack = ['/', '/400', '/404'];
 
-  constructor(
-    private router: Router,
-    private location: Location,
-  ) {}
-
-  back(): void {
-    this.location.back();
+  navigateToParent(): void {
+    this.router.navigate(['..'], { relativeTo: this.route });
   }
 
   canGoBack(): boolean {

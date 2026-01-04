@@ -1,13 +1,13 @@
-import { Component, signal } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
 import { FooterComponent } from './components/footer.component';
 import { NavComponent } from './components/nav.component';
-import { HomeComponent } from './pages/home.page';
 
 @Component({
   standalone: true,
   selector: 'app-root',
-  imports: [NavComponent, HomeComponent, FooterComponent, RouterModule],
+  imports: [NavComponent, FooterComponent, RouterOutlet],
   template: `
     <app-nav></app-nav>
     <div class="content">
@@ -16,6 +16,4 @@ import { HomeComponent } from './pages/home.page';
     <app-footer></app-footer>
   `,
 })
-export class AppComponent {
-  protected readonly title = signal('swapi-angular');
-}
+export class AppComponent {}

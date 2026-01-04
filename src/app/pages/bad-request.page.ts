@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 /**
  * Component that handles bad request page.
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
 @Component({
   standalone: true,
   selector: 'app-bad-request',
+  imports: [RouterLink],
   template: `
     <div class="error">
       <h2>Bad request</h2>
@@ -16,4 +18,4 @@ import { Component } from '@angular/core';
     </div>
   `,
 })
-export class BadRequestComponent {}
+export class BadRequestPage {}

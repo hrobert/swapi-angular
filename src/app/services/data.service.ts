@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+
 import { Pilot } from '../models/Pilot';
 import { Starship } from '../models/Starship';
 
 /**
- * Service responsible for fetching the data from the distant API and storing it.
- * The data retrieved from SWAPI are limited to: starships and their pilots.
+ * Service responsible for fetching the data from the distant API and storing it in memory.
+ * The data retrieved from the SWAPI Reborn API (https://swapi.info/api) are limited to: starships and their pilots.
  */
 @Injectable({
   providedIn: 'root',
@@ -15,8 +16,10 @@ export class DataService {
   // ============================================================================
   // Fields
   // ============================================================================
-  private readonly BASE_API_URL: string = 'https://swapi.info';
+  private readonly BASE_API_URL: string = 'https://swapi.info/api';
   private readonly STARSHIPS_ENDPOINT: string = 'starships';
+
+  private http = inject(HttpClient);
 
   private starshipIdIncrement: number = 1;
   private starships: Starship[] = [];
@@ -30,7 +33,7 @@ export class DataService {
   // ============================================================================
   // Constructor
   // ============================================================================
-  constructor(private http: HttpClient) {
+  constructor() {
     this.loadData();
   }
 
@@ -56,7 +59,7 @@ export class DataService {
    */
   private loadStarshipsAndPilots(url: string): void {
     this.fetchStarships(url).subscribe((response) => {
-      for (const starship of response.results) {
+      for (const starship of response) {
         // Generate an id based on local increment which has nothing to do with
         // SWAPI's id
         starship.id = this.starshipIdIncrement;
@@ -83,16 +86,10 @@ export class DataService {
 
         starship.pilotsData = pilotsData;
         this.starships.push(starship);
-      } // end for
-
-      // If there is another page of data, request it
-      if (response.next) {
-        this.loadStarshipsAndPilots(response.next);
-      } else {
-        // no page left, all async calls done, all data is loaded
-        this.dataLoaded = true;
-        this.subject.next();
       }
+
+      this.dataLoaded = true;
+      this.subject.next();
     });
   }
 
@@ -127,10 +124,10 @@ export class DataService {
    * Note: the id is the client id created by this app which is independent from the SWAPI id.
    *
    * @param id Client id of the starship to be retrieved.
-   * @returns The starship with the given id if starship is found, undefined otherwise.
+   * @returns The starship with the given id if starship is found, null otherwise.
    */
-  getStarship(id: number): Starship | undefined {
-    return this.starships.find((starship) => starship.id === id);
+  getStarship(id: number): Starship | null {
+    return this.starships.find((starship) => starship.id === id) ?? null;
   }
 
   /**
@@ -139,10 +136,10 @@ export class DataService {
    * Note: the id is the client id created by this app which is independent from the SWAPI id.
    *
    * @param id Client id of the pilot to be retrieved.
-   * @returns The pilot with the given id if pilot is found, undefined otherwise.
+   * @returns The pilot with the given id if pilot is found, null otherwise.
    */
-  getPilot(id: number): Pilot | undefined {
-    return this.pilots.find((pilot) => pilot.id === id);
+  getPilot(id: number): Pilot | null {
+    return this.pilots.find((pilot) => pilot.id === id) ?? null;
   }
 
   /**

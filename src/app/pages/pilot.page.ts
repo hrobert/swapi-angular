@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
+import { LoadingComponent } from '../components/loading.component';
 import { Pilot } from '../models/Pilot';
 import { DataService } from '../services/data.service';
-import { LoadingComponent } from './loading.component';
 
 /**
  * Component that handles the display of a pilot detail view.
@@ -12,8 +13,8 @@ import { LoadingComponent } from './loading.component';
   selector: 'app-pilot',
   imports: [LoadingComponent],
   template: `
-    @if (dataLoaded) {
-      @if (pilot) {
+    @if (isDataLoaded()) {
+      @if (pilot(); as pilot) {
         <h2>{{ pilot.name }}</h2>
 
         <div class="specifications">
@@ -52,15 +53,13 @@ import { LoadingComponent } from './loading.component';
     }
   `,
 })
-export class PilotComponent implements OnInit {
-  dataLoaded: boolean = false;
-  pilot: Pilot | undefined;
+export class PilotPage implements OnInit {
+  private readonly dataService = inject(DataService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private dataService: DataService,
-  ) {}
+  public isDataLoaded = signal<boolean>(false);
+  public pilot = signal<Pilot | null>(null);
 
   ngOnInit(): void {
     if (this.dataService.isDataLoaded()) {
@@ -73,15 +72,18 @@ export class PilotComponent implements OnInit {
   }
 
   private initData(): void {
-    this.dataLoaded = true;
     this.route.paramMap.subscribe((params) => {
       const id = Number(params.get('id'));
       if (!isNaN(id)) {
-        this.pilot = this.dataService.getPilot(id);
-        if (!this.pilot) {
+        const pilotData = this.dataService.getPilot(id);
+        if (!pilotData) {
           // Redirect to 404 not found error page
           this.router.navigateByUrl('/404');
+          return;
         }
+
+        this.pilot.set(pilotData);
+        this.isDataLoaded.set(true);
       } else {
         // Redirect to bad request page
         this.router.navigateByUrl('/400');

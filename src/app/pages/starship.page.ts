@@ -1,9 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
+import { LoadingComponent } from '../components/loading.component';
+import { PilotItemComponent } from '../components/pilot-item.component';
 import { Starship } from '../models/Starship';
 import { DataService } from '../services/data.service';
-import { LoadingComponent } from './loading.component';
-import { PilotItemComponent } from './pilot-item.component';
 
 /**
  * Component that handles the display of a starship detail view.
@@ -13,8 +14,8 @@ import { PilotItemComponent } from './pilot-item.component';
   selector: 'app-starship',
   imports: [LoadingComponent, PilotItemComponent],
   template: `
-    @if (dataLoaded) {
-      @if (starship) {
+    @if (isDataLoaded()) {
+      @if (starship(); as starship) {
         <h2>{{ starship.name }}</h2>
 
         <div class="specifications">
@@ -81,11 +82,9 @@ import { PilotItemComponent } from './pilot-item.component';
             <h3>Pilots</h3>
             @if (starship.pilotsData.length > 0) {
               <div class="card-container">
-                <app-pilot-item
-                  *ngFor="let pilot of starship.pilotsData"
-                  [pilot]="pilot"
-                >
-                </app-pilot-item>
+                @for (pilot of starship.pilotsData; track pilot.id) {
+                  <app-pilot-item [pilot]="pilot"> </app-pilot-item>
+                }
               </div>
             } @else {
               <p>No pilot for this starship</p>
@@ -107,16 +106,13 @@ import { PilotItemComponent } from './pilot-item.component';
     }
   `,
 })
-export class StarshipComponent implements OnInit {
-  dataLoaded: boolean = false;
-  starship: Starship | undefined;
-
+export class StarshipPage implements OnInit {
   private readonly dataService = inject(DataService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-  ) {}
+  public isDataLoaded = signal<boolean>(false);
+  public starship = signal<Starship | null>(null);
 
   ngOnInit(): void {
     if (this.dataService.isDataLoaded()) {
@@ -129,15 +125,18 @@ export class StarshipComponent implements OnInit {
   }
 
   private initData(): void {
-    this.dataLoaded = true;
     this.route.paramMap.subscribe((params) => {
       const id = Number(params.get('id'));
       if (!isNaN(id)) {
-        this.starship = this.dataService.getStarship(id);
-        if (!this.starship) {
+        const starshipData = this.dataService.getStarship(id);
+        if (!starshipData) {
           // Redirect to 404 not found error page
           this.router.navigateByUrl('/404');
+          return;
         }
+
+        this.starship.set(starshipData);
+        this.isDataLoaded.set(true);
       } else {
         // Redirect to bad request page
         this.router.navigateByUrl('/400');

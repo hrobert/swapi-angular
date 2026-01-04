@@ -1,11 +1,12 @@
 import { Component, input } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterLink } from '@angular/router';
+
 import { Pilot } from '../models/Pilot';
 
 @Component({
   standalone: true,
   selector: 'app-pilot-item',
-  imports: [RouterModule],
+  imports: [RouterLink],
   template: `
     <div class="card" [routerLink]="['/pilot', pilot().id]">
       <div class="card-title">

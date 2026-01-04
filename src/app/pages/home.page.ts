@@ -1,4 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
+
 import { LoadingComponent } from '../components/loading.component';
 import { StarshipItemComponent } from '../components/starship-item.component';
 import { Starship } from '../models/Starship';
@@ -14,13 +15,11 @@ import { DataService } from '../services/data.service';
   template: `
     <h1><a href="https://github.com/hrobert/swapi-angular">Swangular</a></h1>
 
-    @if (dataLoaded) {
+    @if (isDataLoaded()) {
       <div class="card-container">
-        <app-starship-item
-          *ngFor="let starship of starships"
-          [starship]="starship"
-        >
-        </app-starship-item>
+        @for (starship of starships(); track starship.id) {
+          <app-starship-item [starship]="starship"> </app-starship-item>
+        }
       </div>
     } @else {
       <app-loading></app-loading>
@@ -39,11 +38,11 @@ import { DataService } from '../services/data.service';
     }
   `,
 })
-export class HomeComponent implements OnInit {
-  dataLoaded: boolean = false;
-  starships: Starship[] = [];
-
+export class HomePage implements OnInit {
   private readonly dataService = inject(DataService);
+
+  public isDataLoaded = signal<boolean>(false);
+  public starships = signal<Starship[]>([]);
 
   ngOnInit(): void {
     if (this.dataService.isDataLoaded()) {
@@ -56,7 +55,7 @@ export class HomeComponent implements OnInit {
   }
 
   private initData(): void {
-    this.dataLoaded = true;
-    this.starships = this.dataService.getStarships();
+    this.isDataLoaded.set(true);
+    this.starships.set(this.dataService.getStarships());
   }
 }

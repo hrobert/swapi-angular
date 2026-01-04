@@ -6,12 +6,14 @@ import { Component } from '@angular/core';
 @Component({
   standalone: true,
   selector: 'app-loading',
-  template: `<div class="loading">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div> `,
+  template: `
+    <div class="loading">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  `,
   styles: `
     .loading {
       margin-top: 10px;
