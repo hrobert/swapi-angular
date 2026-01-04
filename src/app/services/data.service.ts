@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { forkJoin, map, Observable, of, Subject, switchMap, tap } from 'rxjs';
 
 import { Pilot } from '../models/Pilot';
 import { Starship } from '../models/Starship';
@@ -51,46 +51,70 @@ export class DataService {
 
   /**
    * Fetch and load all starships and their pilots.
-   *
-   * A recursive approach is used to get the starship data from all the pages.
    * A pilot can appear in multiple starships but only one API call per pilot is done.
    *
    * @param url Url that will be requested to fetch starships.
    */
   private loadStarshipsAndPilots(url: string): void {
-    this.fetchStarships(url).subscribe((response) => {
-      for (const starship of response) {
-        // Generate an id based on local increment which has nothing to do with
-        // SWAPI's id
-        starship.id = this.starshipIdIncrement;
-        this.starshipIdIncrement++;
+    this.dataLoaded = false;
 
-        const pilotsData = [];
-        for (const pilotUrl of starship.pilots) {
-          const pilot = this.pilots.find((p) => p.url === pilotUrl);
-
-          // If the pilot hasn't been fetched yet
-          if (!pilot) {
-            this.fetchPilot(pilotUrl).subscribe((pilot: Pilot) => {
-              // Same as with starship, generate an id from local increment
-              pilot.id = this.pilotIdIncrement;
-              this.pilotIdIncrement++;
-
-              this.pilots.push(pilot);
-              pilotsData.push(pilot);
-            });
-          } else {
-            pilotsData.push(pilot);
+    this.fetchStarships(url)
+      .pipe(
+        switchMap((starships: Starship[]) => {
+          // Assign local ids to starships
+          for (const s of starships) {
+            s.id = this.starshipIdIncrement++;
           }
-        }
 
-        starship.pilotsData = pilotsData;
-        this.starships.push(starship);
-      }
+          // Collect unique pilot URLs across all starships
+          const allPilotUrls = Array.from(
+            new Set(starships.flatMap((s) => s.pilots ?? [])),
+          );
 
-      this.dataLoaded = true;
-      this.subject.next();
-    });
+          // Determine which pilots are not already in memory
+          const alreadyLoaded = new Map(this.pilots.map((p) => [p.url, p]));
+          const missingPilotUrls = allPilotUrls.filter(
+            (u) => !alreadyLoaded.has(u),
+          );
+
+          if (missingPilotUrls.length === 0) {
+            return of(starships);
+          }
+
+          // Fetch each missing pilot once, then store them
+          return forkJoin(missingPilotUrls.map((u) => this.fetchPilot(u))).pipe(
+            tap((fetchedPilots: Pilot[]) => {
+              for (const p of fetchedPilots) {
+                p.id = this.pilotIdIncrement++;
+                this.pilots.push(p);
+              }
+            }),
+            map(() => starships),
+          );
+        }),
+        map((starships: Starship[]) => {
+          const pilotsByUrl = new Map(this.pilots.map((p) => [p.url, p]));
+
+          // Attach pilotsData to each starship
+          for (const s of starships) {
+            s.pilotsData = (s.pilots ?? [])
+              .map((u) => pilotsByUrl.get(u))
+              .filter((p): p is Pilot => !!p);
+          }
+
+          return starships;
+        }),
+      )
+      .subscribe({
+        next: (starships: Starship[]) => {
+          this.starships = starships;
+          this.dataLoaded = true;
+          this.subject.next();
+        },
+        error: (err) => {
+          console.error('Failed to load starships/pilots', err);
+        },
+      });
   }
 
   // ============================================================================
@@ -99,7 +123,7 @@ export class DataService {
   // are only two of them)
   // ============================================================================
   private fetchStarships(url: string): Observable<any> {
-    return this.http.get<any>(url);
+    return this.http.get<Starship[]>(url);
   }
 
   private fetchPilot(url: string): Observable<Pilot> {
