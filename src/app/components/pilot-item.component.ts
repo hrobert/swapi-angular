@@ -1,0 +1,56 @@
+import { Component, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
+
+import { Pilot } from '../models/Pilot';
+
+@Component({
+  standalone: true,
+  selector: 'app-pilot-item',
+  imports: [RouterLink],
+  template: `
+    <div class="card" [routerLink]="['/pilot', pilot().id]">
+      <div class="card-title">
+        {{ pilot().name }}
+      </div>
+
+      <div class="card-content">
+        <div class="content-item">
+          <span class="content-item-label">Height</span>
+          <span class="content-item-data">{{ pilot().height }}</span>
+        </div>
+        <div class="content-item">
+          <span class="content-item-label">Mass</span>
+          <span class="content-item-data">{{ pilot().mass }}</span>
+        </div>
+        <div class="content-item">
+          <span class="content-item-label">Hair color</span>
+          <span class="content-item-data">{{ pilot().hair_color }}</span>
+        </div>
+        <div class="content-item">
+          <span class="content-item-label">Skin color</span>
+          <span class="content-item-data">{{ pilot().skin_color }}</span>
+        </div>
+        <div class="content-item">
+          <span class="content-item-label">Eye color</span>
+          <span class="content-item-data">{{ pilot().eye_color }}</span>
+        </div>
+        <div class="content-item">
+          <span class="content-item-label">Birth year</span>
+          <span class="content-item-data">{{ pilot().birth_year }}</span>
+        </div>
+        <div class="content-item">
+          <span class="content-item-label">Gender</span>
+          <span class="content-item-data">{{ pilot().gender }}</span>
+        </div>
+      </div>
+    </div>
+  `,
+  styles: `
+    .card {
+      width: 300px;
+    }
+  `,
+})
+export class PilotItemComponent {
+  public pilot = input.required<Pilot>();
+}

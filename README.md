@@ -1,7 +1,7 @@
 <!-- TITLE -->
 <div align="center">
   <p>
-    <img src="src/assets/img/swangular.png" width="150px">
+    <img src="doc/logo/swangular.png" width="150px">
   </p>
   <h1>Swangular</h1>
   <p>
@@ -9,19 +9,8 @@
   </p>
   <p>
     Angular app that allows users to navigate the different Star Wars starships and pilots.<br />
-    Data is retrieved from <a href="https://swapi.dev/">SWAPI</a>.
+    Data is retrieved from <a href="https://swapi.info/">SWAPI</a>.
   </p>
-
-  <!--
-  Live demo is not available anymore.
-  <p>
-    <b>
-      <a href="https://swangular.imaohi.com/" target="_blank">
-        » View Live Demo «
-      </a>
-    </b>
-  </p>
-  -->
 </div>
 
 <!-- FEATURES -->
@@ -41,11 +30,8 @@
 
 To run the app locally, follow these steps:
 
-1. Make sure you have <a href="https://nodejs.org/">node</a> 20 (`lts/iron`)
-   and a recent version of the
-   <a href="https://github.com/angular/angular-cli">Angular CLI</a> installed
-   globally. Optionally, we recommend having
-   <a href="https://github.com/nvm-sh/nvm">nvm</a> installed and configured.
+1. Make sure you have <a href="https://nodejs.org/">node</a> 24 (`lts/kryton`).
+   Optionally, we recommend having <a href="https://volta.sh/">volta</a> installed and configured.
 
 2. Clone or download this repository
    ```sh
@@ -59,10 +45,9 @@ To run the app locally, follow these steps:
    ```
 4. Install the dependencies
    ```sh
-   nvm use    # if you have nvm installed
    npm install
    ```
-5. Build and serve the app
+5. Serve the app
    ```sh
    npm start
    ```
@@ -70,7 +55,7 @@ To run the app locally, follow these steps:
 
 ## 📷 Screenshots
 
-<p><img src="./screenshots/loading.png" alt="screenshot loading spinner"></p>
-<p><img src="./screenshots/landing-page.png" alt="screenshot landing page"></p>
-<p><img src="./screenshots/starship.png" alt="screenshot starship details"></p>
-<p><img src="./screenshots/bad-request.png" alt="screenshot bad request error page"></p>
+<p><img src="doc/screenshots/loading.png" alt="screenshot loading spinner"></p>
+<p><img src="doc/screenshots/landing-page.png" alt="screenshot landing page"></p>
+<p><img src="doc/screenshots/starship.png" alt="screenshot starship details"></p>
+<p><img src="doc/screenshots/bad-request.png" alt="screenshot bad request error page"></p>
